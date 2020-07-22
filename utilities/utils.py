@@ -16,9 +16,9 @@ class MessageHandlers(Enum):
 
 class Mutators(Enum):
     BitFlip = "bit_flip",
-    Swap = "swap",
-    Scramble = "scramble",
     Inversion = "inversion",
+    Scramble = "scramble",
+    Swap = "swap",
 
 
 def parse_yaml(yaml_file_path):
