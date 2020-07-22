@@ -9,7 +9,7 @@ from mutation.mutation import apply_mutation
 QUEUE_NAME = "mutation"
 
 
-def receive_selection_callback(channel, method, properties, body):
+def receive_mutation_callback(channel, method, properties, body):
     logging.debug(body)  # TODO: remove
     pair = body.get("payload")
     logging.info("rMQ:{queue_}: Received mutation request for pair: {pair_}".format(
@@ -75,7 +75,7 @@ class RabbitMessageQueue(MessageHandler):
         # Actively listen for messages in queue and perform callback on receive.
         channel.basic_consume(
             queue=QUEUE_NAME,
-            on_message_callback=receive_selection_callback,
+            on_message_callback=receive_mutation_callback,
             auto_ack=True
         )
         logging.info("rMQ:{queue_}: Waiting for mutation requests.".format(
