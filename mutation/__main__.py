@@ -2,8 +2,10 @@ import logging
 
 from database_handler.handlers import DatabaseHandlers
 from database_handler.redis_handler import RedisHandler
+from message_handler.handlers import MessageHandlers
 from message_handler.rabbit_message_queue import RabbitMessageQueue
-from utilities.utils import MessageHandlers, Mutators, __set_mutator, get_pga_id, set_property
+from mutation.mutators import Mutators
+from utilities.utils import __set_mutator, get_pga_id, set_property
 
 logging.basicConfig(level=logging.DEBUG)  # TODO: remove and reduce to INFO
 

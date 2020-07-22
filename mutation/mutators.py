@@ -2,6 +2,14 @@ import logging
 import random
 from abc import ABC, abstractmethod
 from distutils.util import strtobool
+from enum import Enum
+
+
+class Mutators(Enum):
+    BitFlip = "bit_flip",
+    Inversion = "inversion",
+    Scramble = "scramble",
+    Swap = "swap",
 
 
 class AbstractMutation(ABC):

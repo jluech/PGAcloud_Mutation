@@ -1,6 +1,5 @@
 import logging
 import os
-from enum import Enum
 from re import match
 
 import yaml
@@ -8,17 +7,6 @@ import yaml
 __MUTATOR = None
 __PGA_ID = None
 __PROPERTIES = {}
-
-
-class MessageHandlers(Enum):
-    RabbitMQ = "rabbitMQ",
-
-
-class Mutators(Enum):
-    BitFlip = "bit_flip",
-    Inversion = "inversion",
-    Scramble = "scramble",
-    Swap = "swap",
 
 
 def parse_yaml(yaml_file_path):

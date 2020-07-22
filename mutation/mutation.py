@@ -1,8 +1,8 @@
 import logging
 
-from mutation.mutators import BitFlipMutation, InversionMutation, ScrambleMutation, SwapMutation
+from mutation.mutators import Mutators, BitFlipMutation, InversionMutation, ScrambleMutation, SwapMutation
 from population.pair import Pair
-from utilities.utils import Mutators, forward_mutator, get_property
+from utilities.utils import forward_mutator, get_property
 
 
 def apply_mutation(individual1, individual2):
