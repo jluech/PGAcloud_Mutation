@@ -14,8 +14,6 @@ def receive_mutation_callback(channel, method, properties, body):
 
     ind_dict = json.loads(body)
     individual = Individual(ind_dict["solution"], ind_dict["fitness"])
-
-    logging.info(body)  # TODO: remove
     logging.info("rMQ:{queue_}: Received mutation request for individual: {ind_}".format(
         queue_=queue_name,
         ind_=individual,
@@ -72,7 +70,6 @@ class RabbitMessageQueue(MessageHandler):
         channel.basic_consume(
             queue=queue_name,
             on_message_callback=receive_mutation_callback,
-            auto_ack=True
         )
         logging.info("rMQ:{queue_}: Waiting for mutation requests.".format(
             queue_=queue_name
