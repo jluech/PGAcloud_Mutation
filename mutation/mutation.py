@@ -1,26 +1,18 @@
 import logging
 
 from mutation.mutators import Mutators, BitFlipMutation, InversionMutation, ScrambleMutation, SwapMutation
-from population.pair import Pair
 from utilities.utils import forward_mutator, get_property
 
 
-def apply_mutation(individual1, individual2):
+def apply_mutation(individual):
     # Applies the chosen mutation operator on the two individuals and returns a pair {ind1: x, ind2: y}
-    logging.info("Performing mutation on individuals:")
-    logging.info("{ind_}".format(
-        ind_=individual1
-    ))
-    logging.info("{ind_}".format(
-        ind_=individual2
+    logging.info("Performing mutation on individual: {ind_}".format(
+        ind_=individual
     ))
 
     mutator = get_mutator()
     mutation_rate = get_mutation_rate()
-    ind1 = mutator.perform_mutation(individual1, mutation_rate)
-    ind2 = mutator.perform_mutation(individual2, mutation_rate)
-
-    return Pair(ind1, ind2)
+    return mutator.perform_mutation(individual, mutation_rate)
 
 
 def get_mutator():
