@@ -22,19 +22,25 @@ class AbstractMutation(ABC):
 
 class BitFlipMutation(AbstractMutation):
     def perform_mutation(self, individual, mutation_rate):
-        length = individual.solution.__len__()
-        flips_amount = random.randint(1, length)
-        logging.info("Mutating individual '{ind_}' at {amount_} positions.".format(
-            ind_=individual.solution,
-            amount_=flips_amount,
-        ))
-        for flip in range(0, flips_amount):
-            flip_position = random.randint(0, length-1)
-            if strtobool(individual.solution[flip_position]):
-                individual.solution = individual.solution[:flip_position] + "0" + individual.solution[flip_position+1:]
-            else:
-                individual.solution = individual.solution[:flip_position] + "1" + individual.solution[flip_position+1:]
-        logging.info(individual.solution)  # TODO: remove
+        mutation_chance = random.randint(0, 100) / 100
+        # logging.info("Mutation chance = " + str(mutation_chance))
+        mutation_occurred = (mutation_rate >= mutation_chance)
+
+        if mutation_occurred:
+            length = individual.solution.__len__()
+            flips_amount = random.randint(1, length)
+            logging.info("Mutating individual '{ind_}' at {amount_} position(s).".format(
+                ind_=individual.solution,
+                amount_=flips_amount,
+            ))
+            for flip in range(0, flips_amount):
+                flip_position = random.randint(0, length-1)
+                if strtobool(individual.solution[flip_position]):
+                    individual.solution = individual.solution[:flip_position] + "0" + individual.solution[flip_position+1:]
+                else:
+                    individual.solution = individual.solution[:flip_position] + "1" + individual.solution[flip_position+1:]
+        else:
+            logging.info("Mutation of individual '{ind_}' did not occur.".format(ind_=individual.solution))
         return individual
 
 
