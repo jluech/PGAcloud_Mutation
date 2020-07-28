@@ -28,10 +28,13 @@ class BitFlipMutation(AbstractMutation):
             ind_=individual.solution,
             amount_=flips_amount,
         ))
-        for i in range(0, flips_amount):
-            flip_position = random.randint(0, length)
-            individual.solution[flip_position] = not strtobool(individual.solution[flip_position])
-        logging.debug(individual.solution)
+        for flip in range(0, flips_amount):
+            flip_position = random.randint(0, length-1)
+            if strtobool(individual.solution[flip_position]):
+                individual.solution = individual.solution[:flip_position] + "0" + individual.solution[flip_position+1:]
+            else:
+                individual.solution = individual.solution[:flip_position] + "1" + individual.solution[flip_position+1:]
+        logging.info(individual.solution)  # TODO: remove
         return individual
 
 
